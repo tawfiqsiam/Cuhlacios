@@ -4,13 +4,13 @@ const fs = require('fs');
 var client = new discord.Client();
 client.msgs = require('./msgs.json');
 
-const token = 'Njg5ODgwMzkwNzA5Njc0MDIz.XnJT-w.vr9c9rLGjnQFKfHi6uBhsOajMzQ';
+const token = 'Njg5ODgwMzkwNzA5Njc0MDIz.XnKjMg.6AXODfbvFQ7kzMoXhvTdRd4Kplg';
 const prefix = '!';
 const cursedImages = [];
 
 client.on('ready', () => {
   console.log('ready');
-  client.user.setActivity("with your dad's cock");
+  client.user.setActivity("nothing. I'm a bot. I can't play anything");
 });
 
 client.on('message', message => {
