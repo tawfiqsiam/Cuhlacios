@@ -1,6 +1,7 @@
 const discord = require('discord.js');
 const fs = require('fs');
-const { token, owner, prefix } = require('./config.json');
+const token = process.env.token;
+const prefix = process.env.prefix;
 
 var client = new discord.Client();
 client.msgs = require('./msgs.json');
