@@ -4,7 +4,7 @@ const fs = require('fs');
 var client = new discord.Client();
 client.msgs = require('./msgs.json');
 
-const token = 'Njg5ODgwMzkwNzA5Njc0MDIz.XnKjMg.6AXODfbvFQ7kzMoXhvTdRd4Kplg';
+const token = 'Njg5ODgwMzkwNzA5Njc0MDIz.XnKj9Q.Yp8f2Lwe8OF9PwTUZUraAl1Ket8';
 const prefix = '!';
 const cursedImages = [];
 
