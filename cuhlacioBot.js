@@ -54,6 +54,8 @@ client.on('message', message => {
     !hello -> responds with hi! to check if the bot is working.
     !emojify -> turns a string of letters into emojis
     !elongate -> adds a space between each letter of a message, the number of spaces between letters can be changed using the 'spaces=' flag
+    !random -> sends a random google image based on the search term which follows
+    !poll -> creates a poll with a title based on the text which follows the command
     !cuh -> sends the cuhlacios bot profile picture
     !nice cock bro -> sends the 'nice cock bro' image
     !cursed -> sends a random cursed image
@@ -62,6 +64,12 @@ client.on('message', message => {
     !hw get -> sends a series of embeds for each assignment in the list of current assignments. Optional flags include 'teacher=' which only retrieves assignments from a particular teacher, 'due=', which only retrieves assignments due on a particular date, and 'name=', which only retrieves assignments with a particular name.
     !hw remove -> removes a particular assignment from the list of current assignments. Requires the 'name=' which specifies the name of the assignment to remove.
     `);
+  } else if (message.content.startsWith(prefix + 'poll')) {
+    let title = message.content.substring(6);
+    message.channel.send(title).then(messageReaction => {
+      messageReaction.react('👍');
+      messageReaction.react('👎');
+    });
   } else if (message.content.startsWith(prefix + 'emojify')) {
     let text = message.content
       .substring(9)
