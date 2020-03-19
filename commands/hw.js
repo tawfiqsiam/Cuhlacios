@@ -23,7 +23,7 @@ module.exports = {
   name: 'hw',
   description: `add -> adds an assignment to the list of current assignments. requires the 'teacher=', 'due=', 'name=', and 'grade=' flags, where 'due=' represents the date when the assignment is due. Optional flags include 'completion' and 'assigned=' (which represents the date when the assignment was assigned).
   get -> sends a series of embeds for each assignment in the list of current assignments. Optional flags include 'teacher=' which only retrieves assignments from a particular teacher, 'due=', which only retrieves assignments due on a particular date, and 'name=', which only retrieves assignments with a particular name.
-  remove -> removes a particular assignment from the list of current assignments. Requires the 'name=' which specifies the name of the assignment to remove."`,
+  remove -> removes a particular assignment from the list of current assignments. Requires either the 'index=' flag, 'teacher=' flag, 'name=' flag, or 'due=' flag, which delete an assignment with a specific index (starting from 1), teacher, name, or due date respectively. Additional flags include '*', which deletes all assignments.`,
   execute(message, args, client) {
     let assignments = client.msgs['assignments'];
     switch (args[1]) {
