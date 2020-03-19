@@ -1,10 +1,36 @@
 const discord = require('discord.js');
 const fs = require('fs');
+const cheerio = require('cheerio');
+const request = require('request');
 const token = process.env.token;
 const prefix = process.env.prefix;
 
 var client = new discord.Client();
 client.msgs = require('./msgs.json');
+
+function image(searchTerm, message) {
+  var options = {
+    url: 'http://results.dogpile.com/serp?qc=images&q=' + searchTerm,
+    method: 'GET',
+    headers: {
+      Accept: 'text/html',
+      'User-Agent': 'Chrome'
+    }
+  };
+
+  request(options, (error, response, responseBody) => {
+    if (error) return;
+    $ = cheerio.load(responseBody);
+    var links = $('.image a.link');
+    var urls = new Array(links.length)
+      .fill(0)
+      .map((v, i) => links.eq(i).attr('href'));
+    console.log(urls);
+    if (!urls.length) return;
+
+    message.channel.send(urls[Math.floor(Math.random() * urls.length)]);
+  });
+}
 
 client.on('ready', () => {
   console.log('ready');
@@ -77,6 +103,9 @@ client.on('message', message => {
           '.jpg'
       ]
     });
+  } else if (message.content.startsWith(prefix + 'random')) {
+    let searchTerm = message.content.substring(8);
+    image(searchTerm, message);
   } else if (message.content.startsWith(prefix + 'shut')) {
     message.channel.send({ files: ['./images/shut.png'] });
   } else if (message.content.startsWith(prefix + 'hw')) {
