@@ -11,7 +11,10 @@
   "dependencies": {
     "cheerio": "^1.0.0-rc.3",
     "discord.js": "^12.0.2",
+    "discord.js-musicbot-addon": "^13.9.1",
+    "opusscript": "0.0.7",
     "profane-words": "^1.3.0",
-    "request": "^2.88.2"
+    "request": "^2.88.2",
+    "ytdl-core": "^2.0.0"
   }
 }
