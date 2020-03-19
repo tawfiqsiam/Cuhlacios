@@ -208,10 +208,7 @@ client.on('message', message => {
           );
 
         if (assignment.assigned != null) {
-          embed.addField(
-            'Date Assigned',
-            assignment.assigned.toString().substring(0, 14)
-          );
+          embed.addField('Date Assigned', assignment.assigned.toString());
         }
         if (assignment.completion) embed.addField('Completion', 'yes');
         message.channel.send(embed);
