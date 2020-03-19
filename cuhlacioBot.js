@@ -202,7 +202,7 @@ client.on('message', message => {
             { name: 'Teacher', value: assignment.teacher },
             {
               name: 'Date Due',
-              value: assignment.due.toString().substring(0, 14)
+              value: assignment.due.toString()
             },
             { name: 'Grade Type', value: assignment.gradeType }
           );
