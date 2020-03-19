@@ -19,11 +19,8 @@ for (const file of commandFiles) {
   client.commands.set(command.name, command);
 }
 
-// const token = process.env.token;
-// const prefix = process.env.prefix;
-
-const prefix = '!';
-const token = 'Njg5ODgwMzkwNzA5Njc0MDIz.XnKvQQ.iSzbQT-Gu8SZP-e6VosHf5xeAWI';
+const token = process.env.token;
+const prefix = process.env.prefix;
 
 function image(searchTerm, message) {
   var options = {
