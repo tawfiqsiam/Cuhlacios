@@ -63,24 +63,24 @@ client.on('message', message => {
   //         : client.msgs[message.author.username].strikes + 1
   //   };
 
-    fs.writeFile('./msgs.json', JSON.stringify(client.msgs, null, 4), err => {
-      if (err) throw err;
-      message.reply(
-        `You have accumulated ${
-          client.msgs[message.author.username].strikes
-        } strikes, and will be given the 'Caught by Palacios' role for swearing 3 times`
-      );
-    });
+  //   fs.writeFile('./msgs.json', JSON.stringify(client.msgs, null, 4), err => {
+  //     if (err) throw err;
+  //     message.reply(
+  //       `You have accumulated ${
+  //         client.msgs[message.author.username].strikes
+  //       } strikes, and will be given the 'Caught by Palacios' role for swearing 3 times`
+  //     );
+  //   });
 
-    if (client.msgs[message.author.username].strikes === 3) {
-      let role = message.guild.roles.cache.find(
-        role => role.name === 'Caught by Palacios'
-      );
-      message.member.roles.add('689320330589896766');
-      message.reply("You have been given the 'Caught by Palacios' role");
-    }
-    message.delete();
-  }
+  //   if (client.msgs[message.author.username].strikes === 3) {
+  //     let role = message.guild.roles.cache.find(
+  //       role => role.name === 'Caught by Palacios'
+  //     );
+  //     message.member.roles.add('689320330589896766');
+  //     message.reply("You have been given the 'Caught by Palacios' role");
+  //   }
+  //   message.delete();
+  // }
 
   switch (args[0]) {
     case 'hello':
