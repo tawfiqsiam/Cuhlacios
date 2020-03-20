@@ -53,15 +53,15 @@ client.on('ready', () => {
 client.on('message', message => {
   if (message.author.bot) return;
   let args = message.content.substring(prefix.length).split(' ');
-  if (!(args[0] === 'profanity') && filter.check(message.content)) {
-    message.reply('No swearing allowed.');
-    console.log(client.msgs[message.author.username]);
-    client.msgs[message.author.username] = {
-      strikes:
-        client.msgs[message.author.username] == null
-          ? 1
-          : client.msgs[message.author.username].strikes + 1
-    };
+  // if (!(args[0] === 'profanity') && filter.check(message.content)) {
+  //   message.reply('No swearing allowed.');
+  //   console.log(client.msgs[message.author.username]);
+  //   client.msgs[message.author.username] = {
+  //     strikes:
+  //       client.msgs[message.author.username] == null
+  //         ? 1
+  //         : client.msgs[message.author.username].strikes + 1
+  //   };
 
     fs.writeFile('./msgs.json', JSON.stringify(client.msgs, null, 4), err => {
       if (err) throw err;
