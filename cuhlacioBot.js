@@ -6,6 +6,7 @@ client.msgs = require('./msgs.json');
 const fs = require('fs');
 const cheerio = require('cheerio');
 const request = require('request');
+const filter = require('leo-profanity');
 
 client.commands = new discord.Collection();
 
@@ -17,8 +18,10 @@ for (const file of commandFiles) {
   client.commands.set(command.name, command);
 }
 
-const token = process.env.token;
-const prefix = process.env.prefix;
+// const token = process.env.token;
+// const prefix = process.env.prefix;
+const token = 'Njg5ODgwMzkwNzA5Njc0MDIz.XnPPRg.GfVad-nl7ywFw26B6V-jzKiiXg8';
+const prefix = '!';
 
 function image(searchTerm, message) {
   var options = {
@@ -52,6 +55,34 @@ client.on('ready', () => {
 client.on('message', message => {
   if (message.author.bot) return;
   let args = message.content.substring(prefix.length).split(' ');
+  if (!(args[0] === 'profanity') && filter.check(message.content)) {
+    message.reply('No swearing allowed.');
+    console.log(client.msgs[message.author.username]);
+    client.msgs[message.author.username] = {
+      strikes:
+        client.msgs[message.author.username] == null
+          ? 1
+          : client.msgs[message.author.username].strikes + 1
+    };
+
+    fs.writeFile('./msgs.json', JSON.stringify(client.msgs, null, 4), err => {
+      if (err) throw err;
+      message.reply(
+        `You have accumulated ${
+          client.msgs[message.author.username].strikes
+        } strikes, and will be given the 'Caught by Palacios' role for swearing 3 times`
+      );
+    });
+
+    if (client.msgs[message.author.username].strikes === 3) {
+      let role = message.guild.roles.cache.find(
+        role => role.name === 'Caught by Palacios'
+      );
+      message.member.roles.add('690654354763546644');
+      message.reply("You have been given the 'Caught by Palacios' role");
+    }
+    message.delete();
+  }
 
   switch (args[0]) {
     case 'hello':
@@ -89,6 +120,12 @@ client.on('message', message => {
       break;
     case 'react':
       client.commands.get('react').execute(message, args);
+      break;
+    case 'dub':
+      client.commands.get('dub').execute(message, args);
+      break;
+    case 'profanity':
+      client.commands.get('profanity').execute(message, args, client, filter);
       break;
   }
 });
