@@ -76,7 +76,7 @@ client.on('message', message => {
       let role = message.guild.roles.cache.find(
         role => role.name === 'Caught by Palacios'
       );
-      message.member.roles.add('690654354763546644');
+      message.member.roles.add('689320330589896766');
       message.reply("You have been given the 'Caught by Palacios' role");
     }
     message.delete();
