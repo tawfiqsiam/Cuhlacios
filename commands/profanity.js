@@ -18,6 +18,12 @@ module.exports = {
           for (let arg of args.slice(2, args.length)) filter.remove(arg);
           message.reply('Successfully remove profane word.');
           break;
+        case 'list':
+          let reply = '';
+          for (let word of filter.list()) {
+            reply += word + ' ';
+          }
+          message.channel.send(reply);
       }
     } else {
       message.reply(
