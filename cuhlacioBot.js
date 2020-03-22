@@ -93,6 +93,9 @@ client.on('message', message => {
     case 'dub':
       client.commands.get('dub').execute(message, args);
       break;
+    case 'delete':
+      client.commands.get('delete').execute(message, args);
+      break;
   }
 });
 
