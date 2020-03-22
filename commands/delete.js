@@ -5,7 +5,12 @@ module.exports = {
     switch (args[1].split('=')[0]) {
       case 'id':
         message.channel.messages.fetch(args[1].split('=')[1]).then(message => {
-          message.delete();
+          if (message.author.bot) {
+            message.delete();
+          } else
+            message.reply(
+              "Only messages sent by cuhlacios can be deleted using the 'delete' command"
+            );
         });
         break;
     }
