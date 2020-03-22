@@ -78,7 +78,7 @@ module.exports = {
 
         for (let assignment of assignments) {
           if (teacher !== '' && assignment.teacher !== teacher) continue;
-          if (due !== '' && assignment.due !== due) continue;
+          if (due !== '' && assignment.due.split('@')[0] !== due) continue;
           if (name !== '' && assignment.name !== name) continue;
 
           embed = new discord.MessageEmbed()
