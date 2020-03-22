@@ -6,7 +6,6 @@ client.msgs = require('./msgs.json');
 const fs = require('fs');
 const cheerio = require('cheerio');
 const request = require('request');
-const filter = require('leo-profanity');
 
 client.commands = new discord.Collection();
 
@@ -53,34 +52,6 @@ client.on('ready', () => {
 client.on('message', message => {
   if (message.author.bot) return;
   let args = message.content.substring(prefix.length).split(' ');
-  // if (!(args[0] === 'profanity') && filter.check(message.content)) {
-  //   message.reply('No swearing allowed.');
-  //   console.log(client.msgs[message.author.username]);
-  //   client.msgs[message.author.username] = {
-  //     strikes:
-  //       client.msgs[message.author.username] == null
-  //         ? 1
-  //         : client.msgs[message.author.username].strikes + 1
-  //   };
-
-  //   fs.writeFile('./msgs.json', JSON.stringify(client.msgs, null, 4), err => {
-  //     if (err) throw err;
-  //     message.reply(
-  //       `You have accumulated ${
-  //         client.msgs[message.author.username].strikes
-  //       } strikes, and will be given the 'Caught by Palacios' role for swearing 3 times`
-  //     );
-  //   });
-
-  //   if (client.msgs[message.author.username].strikes === 3) {
-  //     let role = message.guild.roles.cache.find(
-  //       role => role.name === 'Caught by Palacios'
-  //     );
-  //     message.member.roles.add('689320330589896766');
-  //     message.reply("You have been given the 'Caught by Palacios' role");
-  //   }
-  //   message.delete();
-  // }
 
   switch (args[0]) {
     case 'hello':
@@ -121,9 +92,6 @@ client.on('message', message => {
       break;
     case 'dub':
       client.commands.get('dub').execute(message, args);
-      break;
-    case 'profanity':
-      client.commands.get('profanity').execute(message, args, client, filter);
       break;
   }
 });

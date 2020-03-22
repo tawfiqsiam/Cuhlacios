@@ -46,12 +46,6 @@ module.exports = {
           message.reply('You need to specify the name of this assignment');
           return;
         }
-        if (assignment.gradeType == null) {
-          message.reply(
-            'You need to specify what type of grade this assignment is: "project", "test", "cwhw" (for classwork / homework), or "six-weeks-test"'
-          );
-          return;
-        }
 
         assignments.push(assignment);
         writeFile(
@@ -95,9 +89,12 @@ module.exports = {
               {
                 name: 'Due Date',
                 value: assignment.due.toString()
-              },
-              { name: 'Grade Type', value: assignment.gradeType }
+              }
             );
+
+          if (assignment.gradeType != null) {
+            embed.addField('Grade Type', assignment.gradeType);
+          }
 
           if (assignment.assigned != null) {
             embed.addField('Date Assigned', assignment.assigned.toString());
