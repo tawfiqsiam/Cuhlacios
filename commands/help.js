@@ -11,6 +11,10 @@ module.exports = {
     for (const file of commandFiles) {
       const command = require(`./${file}`);
       helpMessage += `'!${command.name}': ${command.description}\n`;
+      if (command.name === 'help' || command.name === 'random') {
+        message.channel.send(helpMessage);
+        helpMessage = `'!${command.name}': ${command.description}\n`;
+      }
     }
     message.channel.send(helpMessage);
   }

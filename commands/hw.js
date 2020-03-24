@@ -16,14 +16,16 @@ class Assignment {
     this.completion = completion;
     this.gradeType = gradeType;
     this.name = name;
+    this.answers = [];
   }
 }
 
 module.exports = {
   name: 'hw',
-  description: `add -> adds an assignment to the list of current assignments. requires the 'teacher=', 'due=', 'name=', and 'grade=' flags, where 'due=' represents the date when the assignment is due. Optional flags include 'completion' and 'assigned=' (which represents the date when the assignment was assigned).
+  description: `add -> adds an assignment to the list of current assignments. requires the 'teacher=', 'due=', 'name=', and 'grade=' flags, where 'due=' represents the date when the assignment is due. Optional flags include 'completion' and 'assigned=' (which represents the date when the assignment was assigned). Any files attached to the command message will be added as answers to the assignment.
   get -> sends a series of embeds for each assignment in the list of current assignments. Optional flags include 'teacher=' which only retrieves assignments from a particular teacher, 'due=', which only retrieves assignments due on a particular date, and 'name=', which only retrieves assignments with a particular name.
-  remove -> removes a particular assignment from the list of current assignments. Requires either the 'index=' flag, 'teacher=' flag, 'name=' flag, or 'due=' flag, which delete an assignment with a specific index (starting from 1), teacher, name, or due date respectively. Additional flags include '*', which deletes all assignments.`,
+  remove -> removes a particular assignment from the list of current assignments. Requires either the 'index=' flag, 'teacher=' flag, 'name=' flag, or 'due=' flag, which delete an assignment with a specific index (starting from 1), teacher, name, or due date respectively. Additional flags include '*', which deletes all assignments.
+  edit -> edits a particular assignment from the list of current assignments with a given index, specified by the 'index=' flag, which is required. Then, the same flags given to the 'add' command can be used to edit the assignment, and 'append' and 'replace' can be used to append files to an assignment and replace all files of an assignment with new ones, respectively. Also, the 'remove=' flag can be used to remove an attachment with a specific index (starting from 1). `,
   execute(message, args, client) {
     let assignments = client.msgs['assignments'];
     switch (args[1]) {
@@ -46,6 +48,10 @@ module.exports = {
           message.reply('You need to specify the name of this assignment');
           return;
         }
+
+        message.attachments
+          .array()
+          .forEach(attachment => assignment.answers.push(attachment.url));
 
         assignments.push(assignment);
         writeFile(
@@ -91,6 +97,10 @@ module.exports = {
                 value: assignment.due.toString()
               }
             );
+
+          if (assignment.answers != null) {
+            embed.attachFiles(assignment.answers);
+          }
 
           if (assignment.gradeType != null) {
             embed.addField('Grade Type', assignment.gradeType);
@@ -160,6 +170,23 @@ module.exports = {
       case 'edit':
         let index1 = parseInt(args[2].split('=')[1]) - 1;
         let assignment1 = getAssignment(args, 3);
+
+        for (let arg of args) {
+          if (arg.split('=')[0] === 'remove') {
+            assignments[index1].answers.splice(parseInt(arg.split('=')[1]) - 1);
+          }
+        }
+
+        if (args.includes('append')) {
+          message.attachments.forEach(attachment =>
+            assignments[index1].answers.push(attachment.url)
+          );
+        } else if (args.includes('replace')) {
+          assignments[index1].answers = [];
+          message.attachments.forEach(attachment =>
+            assignments[index1].answers.push(attachment.url)
+          );
+        }
 
         if (assignment1.assigned != null)
           assignments[index1].assigned = assignment1.assigned;
