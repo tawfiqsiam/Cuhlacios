@@ -96,6 +96,10 @@ module.exports = {
               {
                 name: 'Due Date',
                 value: assignment.due.toString()
+              },
+              {
+                name: 'Index',
+                value: i
               }
             );
 
