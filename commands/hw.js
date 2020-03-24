@@ -82,7 +82,8 @@ module.exports = {
           }
         }
 
-        for (let assignment of assignments) {
+        for (let i = 0; i < assignments.length; i++) {
+          let assignment = assignments[i];
           if (teacher !== '' && assignment.teacher !== teacher) continue;
           if (due !== '' && assignment.due.split('@')[0] !== due) continue;
           if (name !== '' && assignment.name !== name) continue;
@@ -112,7 +113,7 @@ module.exports = {
           if (assignment.completion == null || assignment.completion == 'false')
             embed.addField('Completion', 'No');
           else embed.addField('Completion', 'Yes');
-          await message.channel.send(embed);
+          message.channel.send(embed);
         }
         break;
       case 'remove':
