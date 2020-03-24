@@ -112,7 +112,7 @@ module.exports = {
           if (assignment.completion == null || assignment.completion == 'false')
             embed.addField('Completion', 'No');
           else embed.addField('Completion', 'Yes');
-          message.channel.send(embed);
+          await message.channel.send(embed);
         }
         break;
       case 'remove':
