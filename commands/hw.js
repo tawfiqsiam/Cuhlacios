@@ -178,6 +178,8 @@ module.exports = {
         }
 
         if (args.includes('append')) {
+          if (assignments[index1].answers == null)
+            assignments[index1].answers = [];
           message.attachments.forEach(attachment =>
             assignments[index1].answers.push(attachment.url)
           );
