@@ -102,6 +102,10 @@ client.on('message', message => {
       break;
     case 'arjun':
       client.commands.get('arjun').execute(message, args);
+      break;
+    case 'website':
+      client.commands.get('website').execute(message, args);
+      break;
   }
 });
 
