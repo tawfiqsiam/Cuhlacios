@@ -5,5 +5,6 @@ module.exports = {
     message.channel.send({
       files: ['./images/arjun.png']
     });
+    message.delete();
   }
 };
