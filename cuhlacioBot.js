@@ -50,7 +50,7 @@ client.on('ready', () => {
 });
 
 client.on('message', message => {
-  if (message.author.bot) return;
+  if (message.author.bot || message.content.charAt(0) != '!') return;
   let args = message.content.substring(prefix.length).split(' ');
 
   switch (args[0]) {
@@ -96,6 +96,8 @@ client.on('message', message => {
     case 'delete':
       client.commands.get('delete').execute(message, args);
       break;
+    case 'arjun':
+      client.commands.get('arjun').execute(message, args);
   }
 });
 
