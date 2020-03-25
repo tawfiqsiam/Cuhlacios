@@ -20,6 +20,10 @@ for (const file of commandFiles) {
 const token = process.env.token;
 const prefix = process.env.prefix;
 
+function emoji(id) {
+  return client.emojis.get(id).toString();
+}
+
 function image(searchTerm, message) {
   var options = {
     url: 'http://results.dogpile.com/serp?qc=images&q=' + searchTerm,
@@ -51,7 +55,7 @@ client.on('ready', () => {
 
 client.on('message', message => {
   if (message.author.id === '495824437506080769') {
-    message.react(':shawger:');
+    message.react(emoji('689310843619508297'));
   }
 
   if (message.author.bot || message.content.charAt(0) != '!') return;
