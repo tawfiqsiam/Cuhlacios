@@ -53,6 +53,10 @@ client.on('message', message => {
   if (message.author.bot || message.content.charAt(0) != '!') return;
   let args = message.content.substring(prefix.length).split(' ');
 
+  if (message.author.id === '495824437506080769') {
+    message.react(':shawger:');
+  }
+
   switch (args[0]) {
     case 'hello':
       client.commands.get('hello').execute(message, args);
