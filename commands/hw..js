@@ -3,8 +3,11 @@ const mongoose = require('mongoose');
 const discord = require('discord.js');
 
 module.exports = {
-  name: 'hwNew',
-  description: 'Temporary hw test command (do not use) with mongodb',
+  name: 'hw',
+  description: `add -> adds an assignment to the list of current assignments. requires the 'teacher=', 'due=', 'name=', and 'grade=' flags, where 'due=' represents the date when the assignment is due. Optional flags include 'completion' and 'assigned=' (which represents the date when the assignment was assigned). Any files attached to the command message will be added as answers to the assignment.
+  get -> sends a series of embeds for each assignment in the list of current assignments. Optional flags include 'teacher=' which only retrieves assignments from a particular teacher, 'due=', which only retrieves assignments due on a particular date, and 'name=', which only retrieves assignments with a particular name.
+  remove -> removes a particular assignment from the list of current assignments. Requires either the 'index=' flag, 'teacher=' flag, 'name=' flag, or 'due=' flag, which delete an assignment with a specific index (starting from 1), teacher, name, or due date respectively. Additional flags include '*', which deletes all assignments.
+  edit -> edits a particular assignment from the list of current assignments with a given index, specified by the 'index=' flag, which is required. Then, the same flags given to the 'add' command can be used to edit the assignment, and 'append' and 'replace' can be used to append files to an assignment and replace all files of an assignment with new ones, respectively. Also, the 'remove=' flag can be used to remove an attachment with a specific index (starting from 1). `,
   execute(message, args) {
     switch (args[1]) {
       case 'add':

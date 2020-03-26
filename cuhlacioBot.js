@@ -90,9 +90,6 @@ client.on('message', message => {
     case 'random':
       client.commands.get('random').execute(message, args);
       break;
-    case 'hw':
-      client.commands.get('hw').execute(message, args, client);
-      break;
     case 'react':
       client.commands.get('react').execute(message, args);
       break;
@@ -108,8 +105,8 @@ client.on('message', message => {
     case 'website':
       client.commands.get('website').execute(message, args);
       break;
-    case 'hwNew':
-      client.commands.get('hwNew').execute(message, args);
+    case 'hw':
+      client.commands.get('hw').execute(message, args);
       break;
   }
 });
