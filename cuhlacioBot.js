@@ -9,6 +9,8 @@ const request = require('request');
 
 client.commands = new discord.Collection();
 
+client.mongoose = require('./utils/mongoose');
+
 const commandFiles = fs
   .readdirSync('./commands/')
   .filter(file => file.endsWith('.js'));
@@ -106,25 +108,11 @@ client.on('message', message => {
     case 'website':
       client.commands.get('website').execute(message, args);
       break;
+    case 'hwNew':
+      client.commands.get('hwNew').execute(message, args);
+      break;
   }
 });
 
+client.mongoose.init();
 client.login(token);
-
-const gradeTypes = {
-  PROJECT: 'Project',
-  TEST: 'Test',
-  CLASSWORK_HOMEWORK: 'Classwork / Homework',
-  SIX_WEEKS_TEST: 'Six-Weeks Test'
-};
-
-class Assignment {
-  constructor(teacher, assigned, due, completion, gradeType, name) {
-    this.teacher = teacher;
-    this.assigned = assigned;
-    this.due = due;
-    this.completion = completion;
-    this.gradeType = gradeType;
-    this.name = name;
-  }
-}

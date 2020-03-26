@@ -1,5 +1,5 @@
-const fs = require('fs');
 const discord = require('discord.js');
+const fs = require('fs');
 
 const gradeTypes = {
   PROJECT: 'Project',
@@ -178,7 +178,7 @@ module.exports = {
 
         for (let arg of args) {
           if (arg.split('=')[0] === 'remove') {
-            assignments[index1].answers.splice(parseInt(arg.split('=')[1]) - 1);
+            assignments[index1].answers.pop(parseInt(arg.split('=')[1]) - 1);
           }
         }
 

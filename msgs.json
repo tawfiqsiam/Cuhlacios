@@ -1,39 +1,42 @@
 {
-  "assignments": [
-    {
-      "teacher": "Zhuge",
-      "due": "3/23/20@8:00AM",
-      "name": "Spring-Break-AP-Questions"
-    },
-    {
-      "teacher": "Zhuge",
-      "due": "3/23/20@8:00AM",
-      "name": "Test-Corrections"
-    },
-    {
-      "teacher": "Zhuge",
-      "due": "3/28/20@8:00AM",
-      "name": "Quiz-1-Calculator-Active"
-    },
-    {
-      "teacher": "Zhuge",
-      "due": "3/28/20@8:00AM",
-      "name": "Quiz-1-Non-Calculator"
-    },
-    {
-      "teacher": "Foster",
-      "due": "3/24/20@11:59",
-      "name": "IWA-2pg"
-    },
-    {
-      "teacher": "Foster",
-      "due": "3/26/20@11:59",
-      "name": "Bibliography-6-new"
-    },
-    {
-      "teacher": "Bray",
-      "due": "3/27/20",
-      "name": "Acid-Base-Chemistry-Creative-Letter-Project"
-    }
-  ]
+    "assignments": [
+        {
+            "teacher": "Zhuge",
+            "due": "3/23/20@8:00AM",
+            "name": "Spring-Break-AP-Questions"
+        },
+        {
+            "teacher": "Zhuge",
+            "due": "3/23/20@8:00AM",
+            "name": "Test-Corrections"
+        },
+        {
+            "teacher": "Zhuge",
+            "due": "3/28/20@8:00AM",
+            "name": "Quiz-1-Calculator-Active"
+        },
+        {
+            "teacher": "Zhuge",
+            "due": "3/28/20@8:00AM",
+            "name": "Quiz-1-Non-Calculator"
+        },
+        {
+            "teacher": "Foster",
+            "due": "3/24/20@11:59",
+            "name": "edited-test-assignment",
+            "answers": [
+                "https://cdn.discordapp.com/attachments/691873805026721793/692578306108817519/cursed_7.jpg"
+            ]
+        },
+        {
+            "teacher": "Foster",
+            "due": "3/26/20@11:59",
+            "name": "Bibliography-6-new"
+        },
+        {
+            "teacher": "Bray",
+            "due": "3/27/20",
+            "name": "Acid-Base-Chemistry-Creative-Letter-Project"
+        }
+    ]
 }
