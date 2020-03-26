@@ -1,7 +1,6 @@
 const discord = require('discord.js');
 
 const client = new discord.Client();
-client.msgs = require('./msgs.json');
 
 const fs = require('fs');
 const cheerio = require('cheerio');
