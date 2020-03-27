@@ -86,9 +86,6 @@ client.on('message', message => {
     case 'shut':
       client.commands.get('shut').execute(message, args);
       break;
-    case 'random':
-      client.commands.get('random').execute(message, args);
-      break;
     case 'react':
       client.commands.get('react').execute(message, args);
       break;
