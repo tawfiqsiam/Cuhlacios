@@ -1,14 +1,10 @@
 const discord = require('discord.js');
 
 const client = new discord.Client();
+client.commands = new discord.Collection();
+client.mongoose = require('./utils/mongoose');
 
 const fs = require('fs');
-const cheerio = require('cheerio');
-const request = require('request');
-
-client.commands = new discord.Collection();
-
-client.mongoose = require('./utils/mongoose');
 
 const commandFiles = fs
   .readdirSync('./commands/')
@@ -18,32 +14,11 @@ for (const file of commandFiles) {
   client.commands.set(command.name, command);
 }
 
+const usedCommandRecently = {};
+
 const token = process.env.token;
 const prefix = process.env.prefix;
-
-function image(searchTerm, message) {
-  var options = {
-    url: 'http://results.dogpile.com/serp?qc=images&q=' + searchTerm,
-    method: 'GET',
-    headers: {
-      Accept: 'text/html',
-      'User-Agent': 'Chrome'
-    }
-  };
-
-  request(options, (error, response, responseBody) => {
-    if (error) return;
-    $ = cheerio.load(responseBody);
-    var links = $('.image a.link');
-    var urls = new Array(links.length)
-      .fill(0)
-      .map((v, i) => links.eq(i).attr('href'));
-    console.log(urls);
-    if (!urls.length) return;
-
-    message.channel.send(urls[Math.floor(Math.random() * urls.length)]);
-  });
-}
+const cooldownTime = process.env.cooldownTime;
 
 client.on('ready', () => {
   console.log('ready');
@@ -58,52 +33,20 @@ client.on('message', message => {
   if (message.author.bot || message.content.charAt(0) != '!') return;
   let args = message.content.substring(prefix.length).split(' ');
 
-  switch (args[0]) {
-    case 'hello':
-      client.commands.get('hello').execute(message, args);
-      break;
-    case 'help':
-      client.commands.get('help').execute(message, args);
-      break;
-    case 'poll':
-      client.commands.get('poll').execute(message, args);
-      break;
-    case 'emojify':
-      client.commands.get('emojify').execute(message, args);
-      break;
-    case 'elongate':
-      client.commands.get('elongate').execute(message, args);
-      break;
-    case 'cuh':
-      client.commands.get('cuh').execute(message, args);
-      break;
-    case 'niceCockBro':
-      client.commands.get('niceCockBro').execute(message, args);
-      break;
-    case 'cursed':
-      client.commands.get('cursed').execute(message, args);
-      break;
-    case 'shut':
-      client.commands.get('shut').execute(message, args);
-      break;
-    case 'react':
-      client.commands.get('react').execute(message, args);
-      break;
-    case 'dub':
-      client.commands.get('dub').execute(message, args);
-      break;
-    case 'delete':
-      client.commands.get('delete').execute(message, args);
-      break;
-    case 'arjun':
-      client.commands.get('arjun').execute(message, args);
-      break;
-    case 'website':
-      client.commands.get('website').execute(message, args);
-      break;
-    case 'hw':
-      client.commands.get('hw').execute(message, args);
-      break;
+  if (client.commands.get(args[0])) {
+    if (usedCommandRecently[message.author.id]) {
+      message.reply(
+        `You cannot use that command just yet! Wait another ${(cooldownTime -
+          (new Date().getTime() - usedCommandRecently[message.author.id])) /
+          1000} seconds`
+      );
+    } else {
+      client.commands.get(args[0]).execute(message, args);
+      usedCommandRecently[message.author.id] = new Date().getTime();
+      setTimeout(() => {
+        delete usedCommandRecently[message.author.id];
+      }, cooldownTime);
+    }
   }
 });
 
