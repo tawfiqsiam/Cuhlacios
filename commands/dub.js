@@ -4,7 +4,7 @@ module.exports = {
   execute(message, args) {
     message.channel.send({
       files: [
-        './images/dub/dub_' + (Math.floor(Math.random() * 6) + 1) + '.jpg'
+        './images/dub/dub_' + (Math.floor(Math.random() * 21) + 1) + '.jpg'
       ]
     });
   }
