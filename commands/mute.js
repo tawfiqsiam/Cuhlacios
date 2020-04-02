@@ -1,6 +1,6 @@
 const ms = require('ms');
 
-const muteID = '692928747921211462';
+const muteID = '695306368583860232';
 
 module.exports = {
   name: 'mute',
