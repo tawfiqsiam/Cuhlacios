@@ -1,4 +1,5 @@
 const discord = require('discord.js');
+const cron = require('cron');
 
 const client = new discord.Client();
 client.commands = new discord.Collection();
@@ -19,6 +20,8 @@ const usedCommandRecently = {};
 const token = process.env.token;
 const prefix = process.env.prefix;
 const cooldownTime = process.env.cooldownTime;
+const guildId = '695306368348848218';
+const clearSchedule = process.env.clearSchedule;
 
 client.on('ready', () => {
   console.log('ready');
@@ -49,6 +52,26 @@ client.on('message', message => {
     }
   }
 });
+
+cron
+  .job(
+    clearSchedule,
+    () => {
+      console.log('executing');
+      let server = client.guilds.cache.get(guildId);
+      let channels = server.channels.cache;
+      channels.forEach((channel, key, map) => {
+        if (channel instanceof discord.TextChannel) {
+          client.commands.get('clear').clear(channel);
+          console.log(`Cleared channel '${channel.name}'`);
+        }
+      });
+    },
+    undefined,
+    true,
+    'America/Chicago'
+  )
+  .start();
 
 client.mongoose.init();
 client.login(token);
