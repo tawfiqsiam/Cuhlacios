@@ -62,6 +62,8 @@ cron
       let channels = server.channels.cache;
       channels.forEach((channel, key, map) => {
         if (channel instanceof discord.TextChannel) {
+          if (channel.name === 'join-log' || channel.name === 'announcements')
+            return;
           client.commands.get('clear').clear(channel);
           console.log(`Cleared channel '${channel.name}'`);
         }
