@@ -8,7 +8,7 @@ module.exports = {
       output += `||${text.charAt(i)}||`;
     }
     message.channel.send(output).then((result) => {
-      message.delete;
+      message.delete();
     });
   },
 };
