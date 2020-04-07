@@ -9,7 +9,7 @@ const fs = require('fs');
 
 const commandFiles = fs
   .readdirSync('./commands/')
-  .filter(file => file.endsWith('.js'));
+  .filter((file) => file.endsWith('.js'));
 for (const file of commandFiles) {
   const command = require(`./commands/${file}`);
   client.commands.set(command.name, command);
@@ -28,7 +28,7 @@ client.on('ready', () => {
   client.user.setActivity("nothing. I'm a bot. I can't play anything");
 });
 
-client.on('message', message => {
+client.on('message', (message) => {
   if (message.author.id === '495824437506080769') {
     message.react('689310843619508297');
   }
@@ -39,9 +39,11 @@ client.on('message', message => {
   if (client.commands.get(args[0])) {
     if (usedCommandRecently[message.author.id]) {
       message.reply(
-        `You cannot use that command just yet! Wait another ${(cooldownTime -
-          (new Date().getTime() - usedCommandRecently[message.author.id])) /
-          1000} seconds`
+        `You cannot use that command just yet! Wait another ${
+          (cooldownTime -
+            (new Date().getTime() - usedCommandRecently[message.author.id])) /
+          1000
+        } seconds`
       );
     } else {
       client.commands.get(args[0]).execute(message, args);
@@ -65,7 +67,8 @@ cron
           if (
             channel.name === 'join-log' ||
             channel.name === 'announcements' ||
-            channel.name === 'computer-science'
+            channel.name === 'computer-science' ||
+            channel.name === 'general'
           )
             return;
           client.commands.get('clear').clear(channel);
