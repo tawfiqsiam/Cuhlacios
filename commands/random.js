@@ -12,8 +12,8 @@ module.exports = {
       method: 'GET',
       headers: {
         Accept: 'text/html',
-        'User-Agent': 'Chrome'
-      }
+        'User-Agent': 'Chrome',
+      },
     };
 
     request(options, (error, response, responseBody) => {
@@ -23,10 +23,10 @@ module.exports = {
       var urls = new Array(links.length)
         .fill(0)
         .map((v, i) => links.eq(i).attr('href'));
-      console.log(urls);
+      console.log(`${urls.length} results found.`);
       if (!urls.length) return;
 
       message.channel.send(urls[Math.floor(Math.random() * urls.length)]);
     });
-  }
+  },
 };

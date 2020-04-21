@@ -32,15 +32,15 @@ module.exports = {
 
         message.attachments
           .array()
-          .forEach(attachment => assignment.answers.push(attachment.url));
+          .forEach((attachment) => assignment.answers.push(attachment.url));
 
         assignment
           .save()
-          .then(result => console.log(result))
-          .catch(err => console.log(err));
+          .then((result) => console.log(result))
+          .catch((err) => console.log(err));
 
         message.reply(
-          `Your assignment '${assignment.name}' has been successfully added. Type "!hw get" to view current assignments.`
+          `Your assignment '${assignment.name}' has been successfully added. Type "${process.env.prefix}hw get" to view current assignments.`
         );
         break;
       case 'get':
@@ -60,7 +60,7 @@ module.exports = {
           if (assignments.length === 0)
             message.reply('No assignments were found.');
           else {
-            assignments.forEach(assignment => {
+            assignments.forEach((assignment) => {
               let embed = new discord.MessageEmbed()
                 .setColor('#03cffc')
                 .setTitle(assignment.name)
@@ -68,11 +68,11 @@ module.exports = {
                   { name: 'Teacher', value: assignment.teacher },
                   {
                     name: 'Due Date',
-                    value: assignment.due
+                    value: assignment.due,
                   },
                   {
                     name: 'ID',
-                    value: assignment._id
+                    value: assignment._id,
                   }
                 );
 
@@ -106,7 +106,7 @@ module.exports = {
         if (assignment2.gradeType)
           queryParams1.gradeType = assignment2.gradeType;
 
-        Assignment.deleteMany(queryParams1, err => {
+        Assignment.deleteMany(queryParams1, (err) => {
           if (err) console.log(err);
           else message.reply('Successfully deleted assignments.');
         });
@@ -122,11 +122,11 @@ module.exports = {
         Assignment.findById(updateParams._id, (err, assignment) => {
           if (err) console.log(err);
           else
-            assignment.answers.forEach(answer =>
+            assignment.answers.forEach((answer) =>
               updateParams.answers.push(answer)
             );
           console.log('just appended old answers: ' + updateParams);
-        }).then(something => {
+        }).then((something) => {
           for (let arg of args) {
             if (arg.split('=')[0] === 'remove') {
               updateParams.answers.pop(parseInt(arg.split('=')[1]) - 1);
@@ -134,12 +134,12 @@ module.exports = {
           }
 
           if (args.includes('append')) {
-            message.attachments.forEach(attachment =>
+            message.attachments.forEach((attachment) =>
               updateParams.answers.push(attachment.url)
             );
           } else if (args.includes('replace')) {
             updateParams.answers = [];
-            message.attachments.forEach(attachment =>
+            message.attachments.forEach((attachment) =>
               updateParams.answers.push(attachment.url)
             );
           }
@@ -159,7 +159,7 @@ module.exports = {
           );
         });
     }
-  }
+  },
 };
 
 function getAssignment(args) {
