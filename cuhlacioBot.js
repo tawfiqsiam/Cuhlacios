@@ -68,7 +68,7 @@ cron
             channel.name === 'join-log' ||
             channel.name === 'announcements' ||
             channel.name === 'computer-science' ||
-            channel.name === 'general'
+            channel.name === 'memes'
           )
             return;
           client.commands.get('clear').clear(channel);
