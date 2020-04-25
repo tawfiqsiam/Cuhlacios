@@ -7,11 +7,11 @@ module.exports = {
         `You need to enter a valid parameter for ${process.env.prefix}arjun <int>`
       );
     let num = Object.keys(args)[0];
-    if (num === '1')
+    if (num === 1)
       message.channel.send({
         files: ['./images/arjun.png'],
       });
-    else if (num === '2')
+    else if (num === 2)
       message.channel.send({
         files: ['./images/dumbass.png'],
       });
