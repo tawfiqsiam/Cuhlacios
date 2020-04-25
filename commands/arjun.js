@@ -2,19 +2,24 @@ module.exports = {
   name: 'arjun',
   description: 'Sends a spicy picture of arjun being horny af',
   execute(message, args) {
-    if (isNaN(Object.keys(args)[0]))
+    console.log(args);
+    if (isNaN(args[1]))
       return message.reply(
         `You need to enter a valid parameter for ${process.env.prefix}arjun <int>`
       );
-    let num = Object.keys(args)[0];
-    if (num === 1)
-      message.channel.send({
-        files: ['./images/arjun.png'],
-      });
-    else if (num === 2)
-      message.channel.send({
-        files: ['./images/dumbass.png'],
-      });
+    let num = args[1];
+    let file = '';
+    switch (args[1]) {
+      case '1':
+        file = './images/arjun.png';
+        break;
+      case '2':
+        file = './images/dumbass.png';
+        break;
+    }
+    message.channel.send({
+      files: [file],
+    });
     message.delete();
   },
 };
