@@ -23,7 +23,7 @@ module.exports = async (client, message) => {
       usedCommandRecently[message.author.id] = new Date().getTime();
       setTimeout(() => {
         delete usedCommandRecently[message.author.id];
-      }, cooldownTime);
+      }, client.config.cooldownTimer);
     }
   }
 };
