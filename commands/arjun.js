@@ -7,7 +7,6 @@ module.exports = {
       return message.reply(
         `You need to enter a valid parameter for ${process.env.prefix}arjun <int>`
       );
-    let num = args[1];
     let file = '';
     switch (args[1]) {
       case '1':
