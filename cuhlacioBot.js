@@ -16,7 +16,7 @@ const init = async () => {
   await loader.registerEvents(client);
   await loader.checkDiscordStatus(client);
   await client.mongoose.init();
-  await client.scheduler.start();
+  await client.scheduler.start(client);
   await client.login(process.env.TOKEN);
 };
 
