@@ -5,7 +5,6 @@ require('dotenv').config();
 const client = new Discord.Client();
 client.commands = new Discord.Collection();
 client.mongoose = require('./utils/mongoose');
-client.scheduler = require('./utils/scheduler');
 client.config = require('./config.js');
 client.loader = require('./modules/Loader');
 
