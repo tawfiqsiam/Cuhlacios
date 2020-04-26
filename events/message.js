@@ -13,7 +13,7 @@ module.exports = async (client, message) => {
     if (usedCommandRecently[message.author.id]) {
       message.reply(
         `You cannot use that command just yet! Wait another ${
-          (cooldownTime -
+          (client.config.cooldownTime -
             (new Date().getTime() - usedCommandRecently[message.author.id])) /
           1000
         } seconds`
