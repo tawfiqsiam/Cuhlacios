@@ -10,7 +10,8 @@ module.exports = {
       .filter((file) => file.endsWith('.js'));
     for (const file of commandFiles) {
       const command = require(`./${file}`);
-      helpMessage += `'!${command.name}':n/** ${command.description}**\n`;
+      helpMessage += `'!${command.name}':
+** ${command.description}**\n`;
       if (command.name === 'help' || command.name === 'random') {
         message.channel.send(helpMessage);
         helpMessage = `'${process.env.prefix}${command.name}': ${command.description}\n`;
