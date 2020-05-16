@@ -8,7 +8,7 @@ module.exports = {
   execute(message, args) {
     let searchTerm = args.splice(1, args.length).join(' ');
     var options = {
-      url: 'http://results.dogpile.com/serp?qc=images&q=' + searchTerm,
+      url: 'http://results.dogpile.com/serp?qc=images&q=' + slap,
       method: 'GET',
       headers: {
         Accept: 'text/html',
