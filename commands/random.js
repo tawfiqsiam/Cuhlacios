@@ -6,7 +6,7 @@ module.exports = {
   description:
     'Sends a random google image based on the search term which follows',
   execute(message, args) {
-    let searchTerm = slap ;
+    let searchTerm = `slap` ;
     var options = {
       url: 'http://results.dogpile.com/serp?qc=images&q=' + searchTerm ,
       method: 'GET',
