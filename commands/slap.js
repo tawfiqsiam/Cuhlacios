@@ -2,7 +2,7 @@ const cheerio = require('cheerio');
 const request = require('request');
 
 module.exports = {
-  name: 'slap',
+  name: 'random',
   description:
     'Sends a random google image based on the search term which follows',
   execute(message, args) {
@@ -26,14 +26,7 @@ module.exports = {
       console.log(`${urls.length} results found.`);
       if (!urls.length) return;
 
-      let embed = new Discord.RichEmbed()
-            .setDescription(`**<@${message.author.id}> just slapped someone !**`)
-            .setImage(urls[Math.floor(Math.random() * urls.length)
-            .setColor('random')
-
-        message.channel.send(embed);
-        return;
-    }
+      message.channel.send(urls[Math.floor(Math.random() * urls.length)]);
     });
   },
 };
