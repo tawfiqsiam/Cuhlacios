@@ -2,7 +2,7 @@ const cheerio = require('cheerio');
 const request = require('request');
 
 module.exports = {
-  name: 'random',
+  name: 'slap',
   description:
     'Sends a random google image based on the search term which follows',
   execute(message, args) {
