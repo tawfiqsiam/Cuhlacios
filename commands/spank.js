@@ -8,7 +8,7 @@ module.exports = {
   execute(message, args) {
     let searchTerm = `amine spank gif` ;
     var options = {
-      url: 'https://tenor.com/search/' + searchTerm ,
+      url: 'https://api.tenor.com/v1/search?q=' + searchTerm ,
       method: 'GET',
       headers: {
         Accept: 'text/html',
