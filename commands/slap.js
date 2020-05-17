@@ -26,7 +26,14 @@ module.exports = {
       console.log(`${urls.length} results found.`);
       if (!urls.length) return;
 
-      message.channel.send(urls[Math.floor(Math.random() * urls.length)]);
+      let embed = new Discord.RichEmbed()
+            .setDescription(`**<@${message.author.id}> just slapped someone !**`)
+            .setImage(urls[Math.floor(Math.random() * urls.length)
+            .setColor(random);
+
+        message.channel.send(embed);
+        return;
+    }
     });
   },
 };
