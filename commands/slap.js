@@ -29,7 +29,7 @@ module.exports = {
       let embed = new Discord.RichEmbed()
             .setDescription(`**<@${message.author.id}> just slapped someone !**`)
             .setImage(urls[Math.floor(Math.random() * urls.length)
-            .setColor('random');
+            .setColor('random')
 
         message.channel.send(embed);
         return;
