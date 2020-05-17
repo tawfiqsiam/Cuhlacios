@@ -1,32 +1,32 @@
-const cheerio = require('cheerio');
-const request = require('request');
+const Discord = require("discord.js")
+const superagent = require("superagent")
 
-module.exports = {
-  name: 'spank',
-  description:
-    'Send a random spank gif',
-  execute(message, args) {
-    let searchTerm = `amine spank gif` ;
-    var options = {
-      url: 'https://api.tenor.com/v1/registershare?id=8776030&key=LIVDSRZULELA&q=' + searchTerm,
-      method: 'GET',
-      headers: {
-        Accept: 'text/html',
-        'User-Agent': 'Chrome',
-      },
-    };
 
-    request(options, (error, response, responseBody) => {
-      if (error) return;
-      $ = cheerio.load(responseBody);
-      var links = $('.image a.link');
-      var urls = new Array(links.length)
-        .fill(0)
-        .map((v, i) => links.eq(i).attr('href'));
-      console.log(`${urls.length} results found.`);
-      if (!urls.length) return;
+module.exports.run = async (bot, message, args) => {
+    let msg = await message.channel.send("Generating...")
 
-      message.channel.send(urls[Math.floor(Math.random() * urls.length)]);
-    });
-  },
-};
+    let {body} = await superagent
+    .get(`http://aws.random.cat/meow`)
+    //console.log(body.file)
+    if(!{body}) return message.channel.send("I broke! Try again.")
+
+        let cEmbed = new Discord.RichEmbed()
+        .setColor("random")
+        .setAuthor(`TestBot CATS!`, message.guild.iconURL)
+        .setImage(body.file)
+        .setTimestamp()
+        .setFooter(`TEST BOT`, bot.user.displayAvatarURL)
+
+        message.channel.send({embed: cEmbed})
+
+        msg.delete();
+}
+
+
+module.exports.config = {
+    name: "spank",
+    description: "sends a picture of a cat!",
+    usage: "!spank",
+    accessableby: "Members",
+    aliases: ["catto"]
+}
