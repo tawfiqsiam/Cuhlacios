@@ -8,7 +8,7 @@ module.exports = {
   execute(message, args) {
     let searchTerm = `amine spank gif` ;
     var options = {
-      url: 'http://results.dogpile.com/serp?qc=images&q=' + searchTerm ,
+      url: 'https://tenor.com/search/' + searchTerm ,
       method: 'GET',
       headers: {
         Accept: 'text/html',
